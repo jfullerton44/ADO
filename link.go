@@ -42,6 +42,7 @@ func getDiffLink(url1 string, url2 string) (string, error) {
 	if location2 == -1 {
 		return "", fmt.Errorf("url2 bad url")
 	}
-
-	return fmt.Sprintf("https://dev.azure.com/devdiv/OnlineServices/_git/tunnels/branchCompare?baseVersion=GC%s&targetVersion=GC%s", arr1[location1], arr2[location2]), nil
+	outUrlBase := arr1[1 : location1-1]
+	outUrl := strings.Join(outUrlBase, "/")
+	return fmt.Sprintf("https:/%s/branchCompare?baseVersion=GC%s&targetVersion=GC%s", outUrl, arr1[location1], arr2[location2]), nil
 }
